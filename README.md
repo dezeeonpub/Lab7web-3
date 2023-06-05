@@ -208,9 +208,6 @@ php spark serve
 ## UJI COBA LOGIN
 Selanjutnya buka url: http://localhost:8080/user/login
 
-Maka tampilannya akan seperti gambar dibawah.
-
-![ujicoba-login](https://github.com/Herli27052000/Lab11Web/blob/master/img/ujicoba-login.png)
 
 ## 6). MENAMBAHKAN AUTH FILTER
 Selanjutnya membuat filter untuk halaman admin. Buat file baru dengan nama **Auth.php** pada direktori **app/Filters.**
