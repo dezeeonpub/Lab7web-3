@@ -1,10 +1,6 @@
 # Lab7web-3
 
 
-## PERTEMUAN 14
-
-## LAB 11 WEB (***MELANJUTKAN SEBELUMNYA***)
-
 ## PRAKTIKUM 13 - FRAMEWORK LANJUTAN (MODUL LOGIN)
 
 Dipertemuan kali ini kita masih melanjutkan tugas sebelumnya namun kita akan membuat sekaligus mempelajari bagaimana membuat **System Login** dengan module login dalam **Framework CodeIgniter 4** 
@@ -19,7 +15,7 @@ Untuk memulai membuat modul login, yang perlu disiapkan adalah database server m
 ## 1). MEMBUAT TABEL USER
 Buat Tabel User pada Database **lab_ci4**
 
-![Table-user](img/tabel-user.png)
+![Table-user](https://github.com/Herli27052000/Lab11Web/blob/master/img/tabel-user.png)
 
 **PENJELASAN**
 
@@ -39,7 +35,7 @@ CREATE TABLE user (
 ## 2). MEMBUAT MODEL USER
 Selanjutnya adalah membuat Model untuk memproses data Login. Buat file baru pada direktori **app/Models** dengan nama **UserModel.php**
 
-![user-model](img/user-models.png)
+![user-model](https://github.com/Herli27052000/Lab11Web/blob/master/img/user-models.png)
 
 **code UserModel.php**
 ```php
@@ -61,9 +57,9 @@ class UserModel extends Model
 ## 3). MEMBUAT CONTROLLERS USER
 Buat Controllers baru dengan nama **User.php** pada direktori **app/Controllers.** Kemudian tambahkan method **index()** untuk menampilkan daftar user, dan method **login()** untuk proses login.
 
-![function-index](img/function-index.png)
+![function-index](https://github.com/Herli27052000/Lab11Web/blob/master/img/function-index.png)
 
-![function-login](img/function-login.png)
+![function-login](https://github.com/Herli27052000/Lab11Web/blob/master/img/function-login.png)
 
 **code User.php**
 ```php
@@ -128,7 +124,7 @@ class User extends BaseController
 ## 4). MEMBUAT VIEW LOGIN
 Buat direktori baru dengan nama **user** pada direktori **app/views,** kemudian buat file baru dengan nama **login.php**
 
-![login-user](img/login.png)
+![login-user](https://github.com/Herli27052000/Lab11Web/blob/master/img/login.png)
 
 **code login.php**
 ```html
@@ -167,11 +163,11 @@ Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modu
 ```CLI
 php spark make:seeder UserSeeder
 ```
-![User-Seeder](img/spark-seeder.png)
+![User-Seeder](https://github.com/Herli27052000/Lab11Web/blob/master/img/spark-seeder.png)
 
 Selanjutnya,buka file **UserSeeder.php** yang berada dilokasi direktori **/app/Database/Seeds/UserSeeder.php** kemudian isi dengan kode berikut:
 
-![User-seeder](img/users-seeder.png)
+![User-seeder](https://github.com/Herli27052000/Lab11Web/blob/master/img/users-seeder.png)
 
 **code UserSeeder.php**
 ```php
@@ -200,7 +196,7 @@ class UserSeeder extends Seeder
 ```CLI
 php spark db:seed UserSeeder
 ```
-![db-userseeder](img/db-seeder.png)
+![db-userseeder](https://github.com/Herli27052000/Lab11Web/blob/master/img/db-seeder.png)
 
 dan jalankan dibrowser,sebelum itu jangan lupa nyalahkan server nya dengan ketik pada CLI yaitu:
 ```CLI
@@ -209,19 +205,19 @@ php spark serve
 
 * Tambahkan CSS untuk mempercantik tampilan login. Buka file **style.css** pada direktori **ci4\public\style.css**
 
-![style-login](img/login-user.png)
+![style-login](https://github.com/Herli27052000/Lab11Web/blob/master/img/login-user.png)
 
 ## UJI COBA LOGIN
 Selanjutnya buka url: http://localhost:8080/user/login
 
 Maka tampilannya akan seperti gambar dibawah.
 
-![ujicoba-login](img/ujicoba-login.png)
+![ujicoba-login](https://github.com/Herli27052000/Lab11Web/blob/master/img/ujicoba-login.png)
 
 ## 6). MENAMBAHKAN AUTH FILTER
 Selanjutnya membuat filter untuk halaman admin. Buat file baru dengan nama **Auth.php** pada direktori **app/Filters.**
 
-![auth-filters](img/auth-filters.png)
+![auth-filters](https://github.com/Herli27052000/Lab11Web/blob/master/img/auth-filters.png)
 
 **code Auth.php**
 ```php
@@ -254,16 +250,16 @@ class Auth implements FilterInterface
 ```php
 'auth' => App\Filters\Auth::class,
 ```
-![auth-filtrescode](img/auth-class.png)
+![auth-filtrescode](https://github.com/Herli27052000/Lab11Web/blob/master/img/auth-class.png)
 
 * Selanjutnya buka file **app/Config/Routes.php** dan sesuaikan kodenya.
 
-![filters-auth](img/filters.png)
+![filters-auth](https://github.com/Herli27052000/Lab11Web/blob/master/img/filters.png)
 
 ## 7). FUNGSI LOGOUT
 Tambahkan method logout pada Controllers User seperti berikut
 
-![function-logout](img/logout.png)
+![function-logout](https://github.com/Herli27052000/Lab11Web/blob/master/img/logout.png)
 
 ```php
 public function logout()
@@ -275,7 +271,7 @@ public function logout()
 
 * Tambahkan menu logout diheader admin. Ke direktori **app/views/template** lalu buka file **admin_header.php** tambahkan kode berikut.
 
-![admin-logout](img/admin-logout.png)
+![admin-logout](https://github.com/Herli27052000/Lab11Web/blob/master/img/admin-logout.png)
 
 ```html
 <a href="<?= base_url('/admin/logout');?>">Logout</a> 
@@ -283,7 +279,7 @@ public function logout()
 
 * Dan Tambahkan route logout dengan cara ke direktori **app/Config/Routes.php** lalu tambahkan kode berikut.
 
-![routes-logout](img/filters.png)
+![routes-logout](https://github.com/Herli27052000/Lab11Web/blob/master/img/filters.png)
 
 ```php
 $routes->add('logout', 'User::logout');
@@ -292,20 +288,11 @@ $routes->add('logout', 'User::logout');
 ## 8) PERCOBAAN AKSES MENU ADMIN
 Buka url http://localhost:8080/admin/artikel ketika alamat tersebut diakses maka, akan dimunculkan halaman login.
 
-![sign-in](img/sign.png)
 
 Setelah itu akan dibawa ke halaman seperti dibawah.
 
-![admin-artikel](img/admin-artikel.png)
+![admin-artikel](https://github.com/Herli27052000/Lab11Web/blob/master/img/admin-artikel.png)
 
---------------------------------------------------------------------------------------------------------------------------------
-
-## PERTANYAAN DAN TUGAS
-* Selesaikan programnya sesuai Langkah-langkah yang ada. Anda boleh melakukan improvisasi.
-
-* Sudah mengikuti dan menyelesaikan langkah-langkah yang ada dan melakukan improvisasi pada bagian **Tampilan Login** dengan menambahkan CSS 
-
-![tugas](img/ujicoba-login.png)
 
 
 -----------------------------------------------------------------------------------------------------------------------------------
