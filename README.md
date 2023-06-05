@@ -1,93 +1,293 @@
-# CodeIgniter 4 Development
-
-[![Build Status](https://github.com/codeigniter4/CodeIgniter4/workflows/PHPUnit/badge.svg)](https://github.com/codeigniter4/CodeIgniter4/actions?query=workflow%3A%22PHPUnit%22)
-[![Coverage Status](https://coveralls.io/repos/github/codeigniter4/CodeIgniter4/badge.svg?branch=develop)](https://coveralls.io/github/codeigniter4/CodeIgniter4?branch=develop)
-[![Downloads](https://poser.pugx.org/codeigniter4/framework/downloads)](https://packagist.org/packages/codeigniter4/framework)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/codeigniter4/CodeIgniter4)](https://packagist.org/packages/codeigniter4/framework)
-[![GitHub stars](https://img.shields.io/github/stars/codeigniter4/CodeIgniter4)](https://packagist.org/packages/codeigniter4/framework)
-[![GitHub license](https://img.shields.io/github/license/codeigniter4/CodeIgniter4)](https://github.com/codeigniter4/CodeIgniter4/blob/develop/LICENSE)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/codeigniter4/CodeIgniter4/pulls)
-<br>
-
-## What is CodeIgniter?
-
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](http://codeigniter.com).
-
-This repository holds the source code for CodeIgniter 4 only.
-Version 4 is a complete rewrite to bring the quality and the code into a more modern version,
-while still keeping as many of the things intact that has made people love the framework over the years.
-
-More information about the plans for version 4 can be found in [the announcement](http://forum.codeigniter.com/thread-62615.html) on the forums.
-
-### Documentation
-
-The [User Guide](https://codeigniter4.github.io/userguide/) is the primary documentation for CodeIgniter 4.
-
-The current **in-progress** User Guide can be found [here](https://codeigniter4.github.io/CodeIgniter4/).
-As with the rest of the framework, it is a work in progress, and will see changes over time to structure, explanations, etc.
-
-You might also be interested in the [API documentation](https://codeigniter4.github.io/api/) for the framework components.
-
-## Important Change with index.php
-
-index.php is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-CodeIgniter is developed completely on a volunteer basis. As such, please give up to 7 days
-for your issues to be reviewed. If you haven't heard from one of the team in that time period,
-feel free to leave a comment on the issue so that it gets brought back to our attention.
-
-We use GitHub issues to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-If you raise an issue here that pertains to support or a feature request, it will
-be closed! If you are not sure if you have found a bug, raise a thread on the forum first -
-someone else may have encountered the same thing.
-
-Before raising a new GitHub issue, please check that your bug hasn't already
-been reported or fixed.
-
-We use pull requests (PRs) for CONTRIBUTIONS to the repository.
-We are looking for contributions that address one of the reported bugs or
-approved work packages.
-
-Do not use a PR as a form of feature request.
-Unsolicited contributions will only be considered if they fit nicely
-into the framework roadmap.
-Remember that some components that were part of CodeIgniter 3 are being moved
-to optional packages, with their own repository.
-
-## Contributing
-
-We **are** accepting contributions from the community!
-
-Please read the [*Contributing to CodeIgniter*](https://github.com/codeigniter4/CodeIgniter4/blob/develop/contributing/README.md).
-
-## Server Requirements
-
-PHP version 7.3 or higher is required, with the following extensions installed:
+# Lab7web-3
 
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+## PRAKTIKUM 13 - FRAMEWORK LANJUTAN (MODUL LOGIN)
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+Dipertemuan kali ini kita masih melanjutkan tugas sebelumnya namun kita akan membuat sekaligus mempelajari bagaimana membuat **System Login** dengan module login dalam **Framework CodeIgniter 4** 
 
-- json (enabled by default - don't turn it off)
-- xml (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php)
+## LANGKAH - LANGKAH PRAKTIKUM
 
-## Running CodeIgniter Tests
+## PERSIAPAN
+Untuk memulai membuat modul login, yang perlu disiapkan adalah database server menggunakan MySQL. Pastikan MySQL server sudah dapat dijalankan melalui XAMPP.
 
-Information on running the CodeIgniter test suite can be found in the [README.md](tests/README.md) file in the tests directory.
+## MEMBUAT TABEL: USER LOGIN
+
+## 1). MEMBUAT TABEL USER
+Buat Tabel User pada Database **lab_ci4**
+
+![Table-user](https://github.com/Herli27052000/Lab11Web/blob/master/img/tabel-user.png)
+
+**PENJELASAN**
+
+Table berhasil dibuat
+
+**Table user**
+```MySQL
+CREATE TABLE user (
+  id INT(11) auto_increment,
+  username VARCHAR(200) NOT NULL,
+  useremail VARCHAR(200),
+  userpassword VARCHAR(200),
+  PRIMARY KEY(id)
+);
+```
+
+## 2). MEMBUAT MODEL USER
+Selanjutnya adalah membuat Model untuk memproses data Login. Buat file baru pada direktori **app/Models** dengan nama **UserModel.php**
+
+![user-model](https://github.com/Herli27052000/Lab11Web/blob/master/img/user-models.png)
+
+**code UserModel.php**
+```php
+<?php
+
+namespace App\Models;
+
+use CodeIgniter\Model;
+
+class UserModel extends Model
+{
+    protected $table = 'user';
+    protected $primaryKey = 'id';
+    protected $useAutoIncrement = true;
+    protected $allowedFields = ['username', 'useremail', 'userpassword'];
+}
+```
+
+## 3). MEMBUAT CONTROLLERS USER
+Buat Controllers baru dengan nama **User.php** pada direktori **app/Controllers.** Kemudian tambahkan method **index()** untuk menampilkan daftar user, dan method **login()** untuk proses login.
+
+![function-index](https://github.com/Herli27052000/Lab11Web/blob/master/img/function-index.png)
+
+![function-login](https://github.com/Herli27052000/Lab11Web/blob/master/img/function-login.png)
+
+**code User.php**
+```php
+<?php
+
+namespace App\Controllers;
+
+use App\Models\UserModel;
+
+class User extends BaseController
+{
+    public function index()
+    {
+        $title = 'Daftar User';
+        $model = new UserModel();
+        $users = $model->findAll();
+        return view('user/index', compact('users', 'title'));
+    }
+
+    public function login()
+    {
+        helper(['form']);
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+        if (!$email)
+        {
+            return view('user/login');
+        }
+
+        $session = session();
+        $model = new UserModel();
+        $login = $model->where('useremail', $email)->first();
+        if ($login)
+        {
+            $pass = $login['userpassword'];
+            if (password_verify($password, $pass))
+            {
+            $login_data = [
+                'user_id' => $login['id'],
+                'user_name' => $login['username'],
+                'user_email' => $login['useremail'],
+                'logged_in' => TRUE,
+            ];
+            $session->set($login_data);
+            return redirect('admin/artikel');
+        }
+        else
+        {
+            $session->setFlashdata("flash_msg", "Password salah.");
+            return redirect()->to('/user/login');
+            }
+        }
+        else
+        {
+            $session->setFlashdata("flash_msg", "email tidak terdaftar.");
+            return redirect()->to('/user/login');
+        }
+    }
+}
+```
+
+## 4). MEMBUAT VIEW LOGIN
+Buat direktori baru dengan nama **user** pada direktori **app/views,** kemudian buat file baru dengan nama **login.php**
+
+![login-user](https://github.com/Herli27052000/Lab11Web/blob/master/img/login.png)
+
+**code login.php**
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="<?= base_url('/style.css');?>">
+</head>
+<body>
+    <div id="login-wrapper">
+        <h1>Sign In</h1>
+        <?php if(session()->getFlashdata('flash_msg')):?>
+            <div class="alert alert-danger"><?=session()->getFlashdata('flash_msg') ?></div>
+        <?php endif;?>
+        <form action="" method="post">
+            <div class="mb-3">
+                <label for="InputForEmail" class="form-label">Email address</label>
+                <input type="email" name="email" class="form-control" id="InputForEmail" value="<?= set_value('email') ?>">
+            </div>
+            <div class="mb-3">
+                <label for="InputForPassword" class="form-label">Password</label>
+                <input type="password" name="password" class="form-control" id="InputForPassword">
+            </div>
+            <button type="submit" class="btn btn-primary">Login</button>
+        </form>
+    </div>
+</body>
+</html>
+```
+
+## 5). MEMBUAT DATABASE SEEDER
+Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modul login, kita perlu memasukan data user dan password kedalam database. Untuk itu buat database seeder untuk tabel user. Buka CLI, kemudian tulis perintah berikut. 
+
+```CLI
+php spark make:seeder UserSeeder
+```
+
+Selanjutnya,buka file **UserSeeder.php** yang berada dilokasi direktori **/app/Database/Seeds/UserSeeder.php** kemudian isi dengan kode berikut:
+
+![User-seeder](https://github.com/Herli27052000/Lab11Web/blob/master/img/users-seeder.png)
+
+**code UserSeeder.php**
+```php
+<?php
+
+namespace App\Database\Seeds;
+
+use CodeIgniter\Database\Seeder;
+
+class UserSeeder extends Seeder
+{
+    public function run()
+    {
+        $model = model('UserModel');
+		$model->insert([
+            'username' => 'Herli',
+			'useremail' => 'herli27052000@gmail.com',
+			'userpassword' => password_hash('herli1234', PASSWORD_DEFAULT),
+        ]);
+    }
+}
+```
+
+* Selanjutnya buka kembali CLI dan ketik perintah berikut:
+
+```CLI
+php spark db:seed UserSeeder
+```
+
+dan jalankan dibrowser,sebelum itu jangan lupa nyalahkan server nya dengan ketik pada CLI yaitu:
+```CLI
+php spark serve
+```
+
+* Tambahkan CSS untuk mempercantik tampilan login. Buka file **style.css** pada direktori **ci4\public\style.css**
+
+![style-login](https://github.com/Herli27052000/Lab11Web/blob/master/img/login-user.png)
+
+## UJI COBA LOGIN
+Selanjutnya buka url: http://localhost:8080/user/login
+
+
+## 6). MENAMBAHKAN AUTH FILTER
+Selanjutnya membuat filter untuk halaman admin. Buat file baru dengan nama **Auth.php** pada direktori **app/Filters.**
+
+![auth-filters](https://github.com/Herli27052000/Lab11Web/blob/master/img/auth-filters.png)
+
+**code Auth.php**
+```php
+<?php namespace App\Filters;
+
+use CodeIgniter\HTTP\RequestInterface;
+use CodeIgniter\HTTP\ResponseInterface;
+use CodeIgniter\Filters\FilterInterface;
+
+class Auth implements FilterInterface
+{
+    public function before(RequestInterface $request, $arguments = null)
+    {
+        // jika user belum login
+        if(! session()->get('logged_in')){
+            // maka redirct ke halaman login
+            return redirect()->to('/user/login');
+        }
+    }
+
+    public function after(RequestInterface $request, ResponseInterface $response, $arguments = null)
+    {
+        // Do something here
+    }
+}
+```
+
+* Selanjutnya buka file **app/Config/Filters.php** tambahkan kode berikut:
+
+```php
+'auth' => App\Filters\Auth::class,
+```
+![auth-filtrescode](https://github.com/Herli27052000/Lab11Web/blob/master/img/auth-class.png)
+
+* Selanjutnya buka file **app/Config/Routes.php** dan sesuaikan kodenya.
+
+![filters-auth](https://github.com/Herli27052000/Lab11Web/blob/master/img/filters.png)
+
+## 7). FUNGSI LOGOUT
+Tambahkan method logout pada Controllers User seperti berikut
+
+![function-logout](https://github.com/Herli27052000/Lab11Web/blob/master/img/logout.png)
+
+```php
+public function logout()
+    {
+        session()->destroy();
+        return redirect()->to('/user/login');
+    }
+```
+
+* Tambahkan menu logout diheader admin. Ke direktori **app/views/template** lalu buka file **admin_header.php** tambahkan kode berikut.
+
+![admin-logout](https://github.com/Herli27052000/Lab11Web/blob/master/img/admin-logout.png)
+
+```html
+<a href="<?= base_url('/admin/logout');?>">Logout</a> 
+```
+
+* Dan Tambahkan route logout dengan cara ke direktori **app/Config/Routes.php** lalu tambahkan kode berikut.
+
+![routes-logout](https://github.com/Herli27052000/Lab11Web/blob/master/img/filters.png)
+
+```php
+$routes->add('logout', 'User::logout');
+```
+
+## 8) PERCOBAAN AKSES MENU ADMIN
+Buka url http://localhost:8080/admin/artikel ketika alamat tersebut diakses maka, akan dimunculkan halaman login.
+
+
+Setelah itu akan dibawa ke halaman seperti dibawah.
+
+![admin-artikel](https://github.com/Herli27052000/Lab11Web/blob/master/img/admin-artikel.png)
+
+
+
+-----------------------------------------------------------------------------------------------------------------------------------
