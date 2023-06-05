@@ -163,7 +163,6 @@ Database seeder digunakan untuk membuat data dummy. Untuk keperluan ujicoba modu
 ```CLI
 php spark make:seeder UserSeeder
 ```
-![User-Seeder](https://github.com/Herli27052000/Lab11Web/blob/master/img/spark-seeder.png)
 
 Selanjutnya,buka file **UserSeeder.php** yang berada dilokasi direktori **/app/Database/Seeds/UserSeeder.php** kemudian isi dengan kode berikut:
 
@@ -196,7 +195,6 @@ class UserSeeder extends Seeder
 ```CLI
 php spark db:seed UserSeeder
 ```
-![db-userseeder](https://github.com/Herli27052000/Lab11Web/blob/master/img/db-seeder.png)
 
 dan jalankan dibrowser,sebelum itu jangan lupa nyalahkan server nya dengan ketik pada CLI yaitu:
 ```CLI
